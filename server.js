@@ -1,10 +1,9 @@
-import * as dotenv from "dotenv";
-dotenv.config();
-import express from "express";
+require("dotenv").config();
+const express = require("express");
 
-export const app = express();
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-export default app;
+module.exports = app;

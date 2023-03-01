@@ -1,5 +1,16 @@
-import app from "./server.js";
+const app = require("./server.js");
+const db = require("./models/index.js");
 
 app.listen(5000, () => {
   console.log("-->Be advised, the server is up and running!");
 });
+
+(async () => {
+  try {
+    await db.sequelize
+      .sync({ force: true })
+      .then(() => console.log("Successfully connected to the db"));
+  } catch (error) {
+    console.log("Error connecting to the db", error.message);
+  }
+})();
