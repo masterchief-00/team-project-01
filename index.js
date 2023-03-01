@@ -8,7 +8,7 @@ app.listen(5000, () => {
 (async () => {
   try {
     await db.sequelize
-      .sync({ force: true })
+      .sync({ force: false, alter: true })
       .then(() => console.log("Successfully connected to the db"));
   } catch (error) {
     console.log("Error connecting to the db", error.message);
