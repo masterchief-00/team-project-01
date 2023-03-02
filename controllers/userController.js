@@ -12,7 +12,7 @@ const getAllUsers = async (req, res) => {
 
 const createNewUser = async (req, res) => {
   let hashedPWd = await bcrypt.hash(req.body.password, 10);
-  console.log(req.body);
+  
   try {
     const instance = await User.create({
       names: req.body.names,

@@ -15,15 +15,14 @@ const toAllusers = async (req, res) => {
   const msg = {
     to: emails,
     from: {
-      name: req.body.name,
-      email: req.body.email,
+      name: "Kwizera",
+      email: "kwizerapacifique19@gmail.com",
     },
     subject: req.body.subject,
     text: req.body.text,
     html: `<h1>Here goes the email</h1>
             <p>${req.body.text}</p>`,
   };
-
   sendMail(msg);
 
   return res.json({ message: "email sent" });
