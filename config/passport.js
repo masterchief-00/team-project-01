@@ -9,12 +9,10 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then((user) => {
-      done(null, user);
-    })
-    .catch(done);
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
 });
 
 passport.use(
@@ -22,7 +20,7 @@ passport.use(
     {
       clientID: process.env.client_id,
       clientSecret: process.env.client_secret,
-      callbackURL: "http://localhost:5000/auth/callback",
+      callbackURL: "http://localhost:5000/auth/google/callback",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
@@ -33,7 +31,6 @@ passport.use(
           email: profile._json.email,
         },
       }).then(function (user) {
-        // console.log(user);
         return done(user);
       });
     }
